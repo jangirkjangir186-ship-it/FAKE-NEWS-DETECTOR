@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruthScope — Fake News Detector</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="container">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-date" id="today-date"></div>
+    <div class="masthead-title">TruthScope</div>
+    <div class="masthead-sub">AI-Powered Fake News Detection System · Est. 2025</div>
+  </div>
+  <hr class="divider-rule thick">
+
+  <!-- HEADLINE -->
+  <div class="headline-block">
+    <div class="kicker">Breaking Intelligence</div>
+    <h1 class="main-headline">Paste Any News. Know the Truth.</h1>
+    <p class="deck">Our AI cross-examines language patterns, emotional triggers, and credibility signals to expose misinformation before it spreads.</p>
+  </div>
+
+  <!-- INPUT -->
+  <div class="input-section">
+    <label class="input-label">Enter News Article / Headline / Social Post</label>
+    <textarea class="news-textarea" id="newsInput"
+      placeholder="Paste the full article, headline, or any news text here…"
+      maxlength="3000"></textarea>
+    <div class="char-count"><span id="charCount">0</span> / 3000</div>
+
+    <div class="samples-row">
+      <span class="try-label">Try sample:</span>
+      <button class="sample-btn" onclick="loadSample('real')">Real News</button>
+      <button class="sample-btn" onclick="loadSample('fake')">Fake News</button>
+      <button class="sample-btn" onclick="loadSample('misleading')">Misleading</button>
+    </div>
+  </div>
+
+  <button class="analyze-btn" id="analyzeBtn" onclick="analyzeNews()">
+    🔍 Analyze This News
+  </button>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-text">Scanning for misinformation patterns…</div>
+    <div class="scan-line"></div>
+  </div>
+
+  <!-- RESULT CARD -->
+  <div class="result-card" id="resultCard">
+
+    <!-- Banner -->
+    <div class="result-banner" id="resultBanner">
+      <div class="verdict-icon" id="verdictIcon"></div>
+      <div class="verdict-text">
+        <div class="verdict-label">Verdict</div>
+        <div class="verdict-headline" id="verdictHeadline"></div>
+      </div>
+      <div class="confidence-ring">
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <circle class="ring-bg" cx="36" cy="36" r="30"/>
+          <circle class="ring-fill" id="ringFill" cx="36" cy="36" r="30"
+            stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+        </svg>
+        <div class="ring-label">
+          <div class="ring-pct" id="ringPct"></div>
+          <div class="ring-sub">CONF.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meters -->
+    <div class="meters-section">
+      <div class="meter-item">
+        <div class="meter-label">
+          <span>Sensationalism</span>
+          <span id="sensVal">0%</span>
+        </div>
+        <div class="meter-bar-bg">
+          <div class="meter-bar-fill sensational" id="sensBar"></div>
+        </div>
+      </div>
+      <div class="meter-item">
+        <div class="meter-label">
+          <span>Emotional Trigger</span>
+          <span id="emotVal">0%</span>
+        </div>
+        <div class="meter-bar-bg">
+          <div class="meter-bar-fill emotional" id="emotBar"></div>
+        </div>
+      </div>
+      <div class="meter-item">
+        <div class="meter-label">
+          <span>Factual Language</span>
+          <span id="factVal">0%</span>
+        </div>
+        <div class="meter-bar-bg">
+          <div class="meter-bar-fill factual" id="factBar"></div>
+        </div>
+      </div>
+      <div class="meter-item">
+        <div class="meter-label">
+          <span>Credibility Score</span>
+          <span id="credVal">0%</span>
+        </div>
+        <div class="meter-bar-bg">
+          <div class="meter-bar-fill credibility" id="credBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signals -->
+    <div class="signals-section">
+      <div class="signals-title">Detection Signals</div>
+      <div class="signal-list" id="signalList"></div>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-section">
+      <div class="signals-title">AI Analysis</div>
+      <div class="summary-text" id="summaryText"></div>
+    </div>
+
+    <!-- Mode badge -->
+    <div class="mode-badge" id="modeBadge"></div>
+
+  </div><!-- end result-card -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">TruthScope AI · Powered by Claude</div>
+    <div class="footer-right">For awareness only · Always verify with primary sources</div>
+  </div>
+
+</div><!-- end container -->
+
+<script src="script.js"></script>
+</body>
+</html>
